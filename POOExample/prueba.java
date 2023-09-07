@@ -4,6 +4,7 @@ public class prueba
     // Función MAIN (desde aquí corre)
     public static void main(String[] args) 
     {
+        /* 
         // Instanciar un objeto
         // Clase objeto = new Constructor()
         Auto automovil = new Auto();
@@ -29,5 +30,13 @@ public class prueba
         padriurix.mostrarAuto();
 
         System.out.println(automovil.getColor());
+
+        Rgc elProfe = new Rgc("Luis Gelipe de Jebús",
+        "Hernández", "Quintanar", 1, 2, 1980);
+
+        System.out.println("El RFC es: " + elProfe.calcularRGC());
+        */        
+        Vehiculo ovni = new Vehiculo();        
+        Terrestre ferrari = new Terrestre();
     }
 }
