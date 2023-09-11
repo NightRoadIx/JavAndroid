@@ -36,7 +36,17 @@ public class prueba
 
         System.out.println("El RFC es: " + elProfe.calcularRGC());
         */        
-        Vehiculo ovni = new Vehiculo();        
+        Vehiculo ovni = new Vehiculo();
         Terrestre ferrari = new Terrestre();
+
+        ovni.mover();
+        ferrari.mover();
+
+        System.out.println(ferrari.toString());
+
+        // No pueden instanciar clases abstractas
+        // solamente sus chamacas
+        Figura1D guaterfoc = new Figura1D(4);
+
     }
 }

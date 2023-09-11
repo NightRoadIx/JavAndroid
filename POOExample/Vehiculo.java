@@ -100,7 +100,7 @@ public class Vehiculo
         System.out.println("Se creo un Vehículo");
     }
 
-    public void moverVehiculo()
+    public void mover()
     {
         System.out.println("Se movió el vehículo");
     }

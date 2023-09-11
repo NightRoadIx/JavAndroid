@@ -8,6 +8,8 @@ public class Rgc
     private int mm;
     private int aa;
 
+    private String rfc;
+
     // MÉTODOS
     // GETTERS Y SETTERS
     
@@ -120,4 +122,37 @@ public class Rgc
         this.aa = aa;
     }
 
+    // MÉTODOS
+    /**
+     * Calcula el RFC con los atributos de la clase
+     * 
+     * @return String rgc
+     */
+    public String calcularRGC()
+    {
+        // Generar una variable local
+        String rgc;
+        rgc = this.appPat.substring(0, 2);
+        rgc += this.appMat.charAt(0);
+        rgc += this.nombre.charAt(0);
+        rgc = rgc.toUpperCase();
+        rgc += String.valueOf(this.aa).substring(2, 4);
+        
+        if(String.valueOf(this.mm).length() < 2) 
+            rgc += "0";
+        //rgc += (String.valueOf(this.mm).length() < 2)? "0" + String.valueOf(this.mm):String.valueOf(this.mm);
+        rgc += String.valueOf(this.mm);
+        if(String.valueOf(this.dd).length() < 2)
+            rgc += "0";
+        rgc += String.valueOf(this.dd);
+
+        this.rfc = rgc;
+
+        return rgc;
+    }
+
+    public void mostrarRFC()
+    {
+        System.out.println("El RFC es: " + this.rfc);
+    }
 }

@@ -40,4 +40,18 @@ public class Terrestre extends Vehiculo
         System.out.println("Se crea uno terrestre");
     }
 
+    // Sobrecarga de funciones
+    public void mover()
+    {
+        System.out.println("Se movió en las arenas");
+    }
+
+    // Sobrecarga de la funcion toString()
+    // de la clase Object
+    @Override  // Para sobrecargar
+    public String toString()
+    {
+        return "Vehículo terrestre grandote";
+    }
+
 }
