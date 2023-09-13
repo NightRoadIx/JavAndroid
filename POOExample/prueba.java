@@ -48,5 +48,10 @@ public class prueba
         // solamente sus chamacas
         Figura1D guaterfoc = new Figura1D(4);
 
+        /* Instancia un objeto que trae exepciones controladas */
+        Esepsion nueva = new Esepsion();
+        nueva.recibir();
+        System.out.println(nueva.operar());
+
     }
 }
