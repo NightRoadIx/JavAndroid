@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private SeekBar frecuencia;
     private Button inicio;
     private TextView freqVista;
-    private AudioTrack audio;
+    private AudioTrack audioTrack;
     private boolean isPlaying = false;
 
     @Override
@@ -60,7 +60,10 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         // Para activar la generación de audio
                         if(!isPlaying) {
+                            // Obtener el valor de frecuencia
                             int freq = frecuencia.getProgress() + 20;
+                            // Iniciar el audio generado
+                            elPlai(freq);
                             inicio.setText("||");
                         }
                         // Para desactivar
@@ -72,8 +75,57 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
     }
+
+    // MÉTODOS
+    // Pa' generar el audio
+    private void elPlai(int frecuencia)
+    {
+        int bufferSize = AudioTrack.getMinBufferSize(
+                frecuencia,
+                AudioFormat.CHANNEL_OUT_MONO,
+                AudioFormat.ENCODING_PCM_16BIT
+        );
+        audioTrack = new AudioTrack.Builder()
+                .setAudioFormat(new AudioFormat.Builder()
+                        .setSampleRate(frecuencia)
+                        .setEncoding(AudioFormat.ENCODING_PCM_16BIT)
+                        .setChannelMask(AudioFormat.CHANNEL_OUT_MONO)
+                        .build())
+                .setTransferMode(AudioTrack.MODE_STREAM)
+                .setBufferSizeInBytes(bufferSize)
+                .build();
+
+        // Se ejecuta
+        audioTrack.play();
+
+        // Propiedades
+        final int fs = 44100;
+        final double freqangular = 2.0 * Math.PI * frecuencia;
+        final short[] buffer = new short[fs];
+        final double incremento = freqangular / fs;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(isPlaying)
+                {
+                    for(int i = 0; i < fs; i++)
+                    {
+                        buffer[i] = (short)(Short.MAX_VALUE * Math.sin(freqangular * i / fs));
+                    }
+                    audioTrack.write(buffer, 0, buffer.length);
+                }
+                stopAudio();
+            }
+        }).start();
+    }
+
+    private void stopAudio()
+    {
+        if (audioTrack != null) {
+            audioTrack.stop();
+            audioTrack.release();
+        }
+        isPlaying = false;
+    }
 }
-
-
-
-
